@@ -17,30 +17,30 @@
 
 ## ✨ Возможности проекта
 
-Полноценный каталог товаров с вариациями
-Поиск и категории товаров
-Корзина товаров
-Server Components и Server Actions
-Интеграция с PostgreSQL через Prisma ORM
-Формы с валидацией 
-Отправка email-уведомлений через Resend
-Современный UI на базе shadcn/ui и Radix UI
-Полностью адаптивный дизайн
-Безопасная работа с серверной логикой 
+- Полноценный каталог товаров с вариациями
+- Поиск и категории товаров
+- Корзина товаров
+- Server Components и Server Actions
+- Интеграция с PostgreSQL через Prisma ORM
+- Формы с валидацией 
+- Отправка email-уведомлений через Resend
+- Современный UI на базе shadcn/ui и Radix UI
+- Полностью адаптивный дизайн
+- Безопасная работа с серверной логикой 
 
 ---
 
 ## 🛠 Технологический стек
 
-Next.js 16 + React 19
-TypeScript
-Tailwind CSS 4
-Prisma ORM + PostgreSQL
-Zustand 
-React Hook Form + Zod 
-Radix UI / shadcn/ui
-Resend 
-Axios
+- Next.js 16 + React 19
+- TypeScript
+- Tailwind CSS 4
+- Prisma ORM + PostgreSQL
+- Zustand 
+- React Hook Form + Zod 
+- Radix UI / shadcn/ui
+- Resend 
+- Axios
 
 ---
 
@@ -65,9 +65,10 @@ npm install
 
 Пример локальной настройки:
 
-Database: flower_shop
-User: postgres
-Port: 5432
+- Database: flower_shop
+- User: postgres
+- Password: postgres123
+- Port: 5432
 
 ### 4. Настройка окружения
 
