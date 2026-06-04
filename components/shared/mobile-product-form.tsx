@@ -1,6 +1,6 @@
-import { IProduct } from '@/@types/prisma';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { IProduct } from '@/services/dto/product.dto';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
 import { Variation } from './variation';

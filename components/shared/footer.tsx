@@ -21,7 +21,7 @@ export const Footer: React.FC<Props> = ({ className }) => {
             <div className="container mx-auto px-6 xl:max-w-5xl lg:max-w-4xl">
                 <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-12 md:gap-16 lg:gap-24">
                     <div className="text-center md:text-left">
-                        <h3 className="xl:text-3xl lg:text-2xl font-serif font-medium text-rose-700 mb-4">Provence</h3>
+                        <h3 className="xl:text-3xl lg:text-2xl font-serif font-medium text-rose-700 mb-4">FlowerShop</h3>
                         <p className="text-gray-600 xl:text-sm lg:text-xs leading-relaxed whitespace-nowrap">
                             • Абсолютная красота<br />
                             • Быстрая доставка<br />
@@ -39,12 +39,12 @@ export const Footer: React.FC<Props> = ({ className }) => {
                             <li className="flex items-center justify-center md:justify-start gap-3">
                                 <Mail size={18} className="text-rose-600" />
                                 <a className="hover:text-rose-600">
-                                    ***@gmail.com
+                                    *******@gmail.com
                                 </a>
                             </li>
                             <li className="flex items-start justify-center md:justify-start gap-3">
                                 <MapPin size={18} className="text-rose-600 mt-1" />
-                                <span>**Адрес**</span>
+                                <span>*******************************</span>
                             </li>
                         </ul>
                     </div>
@@ -52,10 +52,10 @@ export const Footer: React.FC<Props> = ({ className }) => {
                     <div className="text-center md:text-left whitespace-nowrap">
                         <h4 className="font-medium text-gray-800 mb-4">Будь с нами</h4>
                         <div className="flex justify-center gap-8">
-                            <a href="" className="cursor-pointer text-gray-500 hover:text-rose-600 transition-colors" target="_blank">
+                            <a href="******************" className="cursor-pointer text-gray-500 hover:text-rose-600 transition-colors" target="_blank">
                                 <Instagram className='xl:size-8 lg:size-6' />
                             </a>
-                            <a href="" className="cursor-pointer text-gray-500 hover:text-rose-600 transition-colors" target="_blank">
+                            <a href="**********************" className="cursor-pointer text-gray-500 hover:text-rose-600 transition-colors" target="_blank">
                                 <Send className='xl:size-8 lg:size-6' />
                             </a>
                         </div>
@@ -64,7 +64,7 @@ export const Footer: React.FC<Props> = ({ className }) => {
                 </div>
 
                 <div className="mt-12 text-center text-gray-500 xl:text-sm lg:text-xs">
-                    © {new Date().getFullYear()} Provence — цветы с любовью
+                    © {new Date().getFullYear()} FlowerShop — цветы с любовью
                 </div>
             </div>
         </footer>

@@ -6,22 +6,24 @@ export const updateCartTotalAmount = async (token: string) => {
         where: {
             token,
         },
-        include: {
+        select: {
+            id: true,
             cartItems: {
-                orderBy: {
-                    createdAt: 'desc',
-                },
-                include: {
+                select: {
                     product: {
-                        include: {
-                            variations: true,
-                        }
+                        select: {
+                            price: true,
+                        },
                     },
-                    variations: true,
-                }
+                    variations: {
+                        select: {
+                            price: true,
+                        },
+                    },
+                },
             },
-        }
-    })
+        },
+    });
 
     if (!token) {
         return;
@@ -31,27 +33,40 @@ export const updateCartTotalAmount = async (token: string) => {
         return acc + CalcTotalItemPrice(item)
     }, 0)
 
-    return await prisma.cart.update({
+    return prisma.cart.update({
         where: {
-            id: userCart?.id
+            id: userCart?.id,
         },
         data: {
             totalAmount,
         },
-        include: {
+        select: {
+            id: true,
+            token: true,
+            totalAmount: true,
             cartItems: {
                 orderBy: {
                     createdAt: 'desc',
                 },
-                include: {
+                select: {
+                    id: true,
                     product: {
-                        include: {
-                            variations: true,
-                        }
+                        select: {
+                            id: true,
+                            name: true,
+                            imageUrl: true,
+                            price: true,
+                        },
                     },
-                    variations: true,
-                }
+                    variations: {
+                        select: {
+                            id: true,
+                            name: true,
+                            price: true,
+                        },
+                    },
+                },
             },
         },
-    })
+    });
 }

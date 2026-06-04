@@ -1,6 +1,6 @@
 'use client';
 
-import { IProduct } from '@/@types/prisma';
+import { IProduct } from '@/services/dto/product.dto';
 import { useCartStore } from '@/store/cart';
 import toast from 'react-hot-toast';
 import { useSet } from 'react-use';

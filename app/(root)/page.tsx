@@ -1,19 +1,10 @@
 import { Container } from "@/components/shared/container";
 import { ProductsGroupList } from "@/components/shared/products-group-list";
 import { TopBar } from "@/components/shared/top-bar";
-import { prisma } from "@/prisma/prisma-client";
+import { getCategoriesWithProducts } from "@/services/cache/get-categories-with-products";
 
 export default async function Home() {
-    const categories = await prisma.category.findMany({
-        include: {
-            products: {
-                include: {
-                    variations: true
-                }
-            }
-        }
-    });
-    //
+    const categories = await getCategoriesWithProducts()
     return (
         <>
             <Container className="hidden lg:block 2xl:mt-8 lg:mt-6">
@@ -21,19 +12,17 @@ export default async function Home() {
                     Все цветы
                 </h1>
             </Container>
-            <TopBar categories={categories.filter((categories) => categories.products.length > 0)} className="hidden lg:block" />
+            <TopBar categories={categories.map(c => ({ id: c.id, name: c.name }))} className="hidden lg:block" />
             <Container className="pt-30 lg:pt-0">
                 <div className="flex-1">
                     <div className="flex flex-col gap-8 lg:gap-16">
                         {categories.map((categories) => (
-                            categories.products.length > 0 && (
-                                <ProductsGroupList
-                                    key={categories.id}
-                                    title={categories.name}
-                                    categoryId={categories.id}
-                                    items={categories.products}
-                                />
-                            )
+                            <ProductsGroupList
+                                key={categories.id}
+                                title={categories.name}
+                                categoryId={categories.id}
+                                items={categories.products}
+                            />
                         ))}
                     </div>
                 </div>

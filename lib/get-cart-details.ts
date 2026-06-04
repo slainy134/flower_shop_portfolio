@@ -1,5 +1,6 @@
 import { CartDTO } from "@/services/dto/cart.dto";
 import { CalcTotalItemPrice } from "./calc-cart-item-price";
+
 export type ICartItem = {
     id: number;
     quantity: number;

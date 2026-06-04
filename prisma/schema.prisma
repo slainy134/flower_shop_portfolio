@@ -10,14 +10,17 @@ model User {
     id Int @id @default(autoincrement())
 
     fullName   String
-    email      String   @unique
-    password   String
+    firstName  String?
+    lastName   String?
+    email      String?  @unique
+    phone      String?
+    password   String?
     role       UserRole @default(USER)
     verified   DateTime
     provider   String?
     providerId String?
 
-    cart             Cart?
+    carts            Cart[]
     orders           Order[]
     verificationCode VerificationCode?
 
@@ -62,9 +65,9 @@ model Cart {
     id Int @id @default(autoincrement())
 
     user   User? @relation(fields: [userId], references: [id])
-    userId Int?  @unique
+    userId Int?
 
-    token String?
+    token String? @unique
 
     totalAmount Int @default(0)
 
@@ -106,6 +109,8 @@ model Order {
     lastName  String
     email     String
     address   String
+    date      String
+    time      String
     phone     String
     comment   String?
     createdAt DateTime @default(now())

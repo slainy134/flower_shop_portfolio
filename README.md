@@ -17,6 +17,7 @@
 
 ## ✨ Возможности проекта
 
+- NextAuth(Yandex oAuth)
 - Полноценный каталог товаров с вариациями
 - Поиск и категории товаров
 - Корзина товаров
@@ -24,6 +25,8 @@
 - Интеграция с PostgreSQL через Prisma ORM
 - Формы с валидацией 
 - Отправка email-уведомлений через Resend
+- Отправка уведомлений в Telegram бота 
+- Оплата товаров через YooKassa
 - Современный UI на базе shadcn/ui и Radix UI
 - Полностью адаптивный дизайн
 - Безопасная работа с серверной логикой 
@@ -41,6 +44,8 @@
 - Radix UI / shadcn/ui
 - Resend 
 - Axios
+- NextAuth
+- Node-telegram-bot-api
 
 ---
 
@@ -84,6 +89,10 @@ RESEND_API_KEY=***
 YOOKASSA_API_KEY=***
 YOOKASSA_CALLBACK_URL=***
 YOOKASSA_STORE_ID=***
+NEXTAUTH_SECRET=***
+
+API_KEY_BOT=***
+BOT_CHAT_ID=***
 ```
 
 ### 5. Генерация Prisma клиента

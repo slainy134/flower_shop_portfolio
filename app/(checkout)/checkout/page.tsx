@@ -9,6 +9,8 @@ import { CheckoutSideBar } from "@/components/shared/checkout/checkout-side-bar"
 import { useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -16,6 +18,11 @@ import toast from "react-hot-toast";
 export default function CheckoutPage() {
 
     const [submitting, setSubmitting] = useState(false)
+
+    const { data: session, } = useSession();
+    if (!session) {
+        return redirect('/non-auth')
+    }
 
     const form = useForm<TCheckoutFormValues>({
         resolver: zodResolver(checkoutFormSchema),
@@ -25,6 +32,7 @@ export default function CheckoutPage() {
             email: '',
             phone: '',
             address: '',
+            time: '',
             comment: '',
         }
     })
@@ -32,6 +40,7 @@ export default function CheckoutPage() {
     const onSubmit = async (data: TCheckoutFormValues) => {
         try {
             setSubmitting(true)
+            console.log(data)
 
             const url = await createOrder(data)
 

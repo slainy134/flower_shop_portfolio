@@ -4,7 +4,9 @@ import { prisma } from "@/prisma/prisma-client";
 import { CreateCartItemDTO } from "@/services/dto/cart.dto";
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+
 export async function GET(req: NextRequest) {
+
     try {
         const token = req.cookies.get('cartToken')?.value;
 
@@ -14,28 +16,38 @@ export async function GET(req: NextRequest) {
 
         const userCart = await prisma.cart.findFirst({
             where: {
-                OR: [
-                    {
-                        token,
-                    }
-                ]
+                token,
             },
-            include: {
+            select: {
+                id: true,
+                token: true,
+                totalAmount: true,
                 cartItems: {
                     orderBy: {
                         createdAt: 'desc',
                     },
-                    include: {
+                    select: {
+                        id: true,
+                        quantity: true,
                         product: {
-                            include: {
-                                variations: true,
-                            }
+                            select: {
+                                id: true,
+                                name: true,
+                                imageUrl: true,
+                                price: true,
+                            },
                         },
-                        variations: true,
-                    }
+                        variations: {
+                            select: {
+                                id: true,
+                                name: true,
+                                price: true,
+                                imageUrl: true,
+                            },
+                        },
+                    },
                 },
-
-            }
+            },
         });
 
         return NextResponse.json(userCart);
@@ -69,7 +81,9 @@ export async function POST(req: NextRequest) {
         const updatedCart = await updateCartTotalAmount(token);
         const resp = NextResponse.json(updatedCart);
 
-        resp.cookies.set('cartToken', token)
+        resp.cookies.set('cartToken', token, {
+            maxAge: 60 * 60 * 24 * 365 * 2,
+        })
 
         return resp;
     } catch (error) {

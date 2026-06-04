@@ -1,8 +1,8 @@
 'use client'
 
-import { IProduct } from '@/@types/prisma';
 import { useChooseProduct } from '@/hooks/use-choose-product';
 import { useIsMobile } from '@/hooks/use-is-mobile';
+import { IProduct } from '@/services/dto/product.dto';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
 import { Button } from '../ui/button';
@@ -10,10 +10,9 @@ import { MobileProductForm } from './mobile-product-form';
 import { Variation } from './variation';
 interface Props {
     product: IProduct
-    className?: string;
 }
 
-export const ChooseProduct: React.FC<Props> = ({ className, product }) => {
+export const ChooseProduct: React.FC<Props> = ({ product }) => {
 
     const { selectedVariations, addVariation, totalPrice, onAddProduct, loading } = useChooseProduct(product);
 

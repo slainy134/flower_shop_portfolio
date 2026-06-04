@@ -2,13 +2,13 @@
 
 import { useScrollToCategory } from '@/lib/scroll';
 import { cn } from '@/lib/utils';
+import { CategoryNavDTO } from '@/services/dto/category.dto';
 import { useCategoryStore } from '@/store/category';
-import { Category } from '@prisma/client';
 import { Menu, X } from 'lucide-react';
 import React from 'react';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
 interface Props {
-    items: Category[];
+    items: CategoryNavDTO[];
     className?: string;
 }
 
@@ -19,10 +19,6 @@ export const MobileCategories: React.FC<Props> = ({ className, items }) => {
         <div className={className}>
             <Sheet>
                 <SheetTrigger>
-                    {/* <Button
-                        className='flex items-center justify-center h-10 w-10 mr-2'
-                        suppressHydrationWarning
-                    > */}
                     <Menu className='flex items-center justify-center h-8 w-8 mr-2 text-rose-500' />
                 </SheetTrigger>
                 <SheetContent showCloseButton={false}>
@@ -41,7 +37,7 @@ export const MobileCategories: React.FC<Props> = ({ className, items }) => {
                             <a
                                 key={category.id}
                                 href={`/#${category.name}`}
-                                onClick={(e) => scrollToCategory(e, category)}
+                                onClick={(e) => scrollToCategory(e, category as any)}
                                 className={cn(
                                     'py-2 rounded-lg pl-2',
                                     activeId === category.id

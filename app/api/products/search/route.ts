@@ -9,11 +9,16 @@ export async function GET(req: NextRequest) {
         where: {
             name: {
                 contains: query,
-                mode: "insensitive"
+                mode: 'insensitive',
             },
         },
+        select: {
+            id: true,
+            name: true,
+            price: true,
+        },
         take: 8,
-    })
+    });
 
     return NextResponse.json(products)
 }

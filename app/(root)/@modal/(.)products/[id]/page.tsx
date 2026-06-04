@@ -1,5 +1,5 @@
 import { ChooseProductModal } from "@/components/shared/modal/choose-product-modal";
-import { prisma } from "@/prisma/prisma-client";
+import { getProducts } from "@/services/cache/get-products";
 import { notFound } from "next/navigation";
 
 export default async function ProductModalPage({ params, }: { params: Promise<{ id: string }>; }) {
@@ -12,14 +12,7 @@ export default async function ProductModalPage({ params, }: { params: Promise<{ 
         notFound();
     }
 
-    const product = await prisma.product.findFirst({
-        where: {
-            id: Number(id),
-        },
-        include: {
-            variations: true,
-        }
-    })
+    const product = await getProducts(id);
 
     if (!product) {
         return notFound();

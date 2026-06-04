@@ -2,12 +2,12 @@
 
 import { useScrollToCategory } from '@/lib/scroll';
 import { cn } from '@/lib/utils';
+import { CategoryNavDTO } from '@/services/dto/category.dto';
 import { useCategoryStore } from '@/store/category';
-import { Category } from '@prisma/client';
 import React from 'react';
 
 interface Props {
-    items: Category[];
+    items: CategoryNavDTO[];
     className?: string;
 }
 
@@ -21,7 +21,7 @@ export const Categories: React.FC<Props> = ({ items, className }) => {
                 <a
                     key={category.id}
                     href={`/#${category.name}`}
-                    onClick={(e) => scrollToCategory(e, category)}
+                    onClick={(e) => scrollToCategory(e, category as any)}
                     className={cn(
                         'flex items-center font-bold xl:h-11 lg:h-10 rounded-2xl px-5 transition-colors 2xl:text-[16px] xl:text-[14px] lg:text-[12px]',
                         activeId === category.id

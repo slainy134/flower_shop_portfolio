@@ -1,6 +1,6 @@
 import { ChooseProduct } from "@/components/shared/choose-product";
 import { Container } from "@/components/shared/container";
-import { prisma } from "@/prisma/prisma-client";
+import { getProducts } from "@/services/cache/get-products";
 import { notFound } from "next/navigation";
 
 export default async function ProductPage({ params, }: { params: Promise<{ id: string }>; }) {
@@ -12,14 +12,7 @@ export default async function ProductPage({ params, }: { params: Promise<{ id: s
         notFound();
     }
 
-    const product = await prisma.product.findFirst({
-        where: {
-            id: Number(id),
-        },
-        include: {
-            variations: true,
-        }
-    })
+    const product = await getProducts(id);
 
     if (!product) {
         notFound();

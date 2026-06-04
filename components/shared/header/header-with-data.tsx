@@ -1,17 +1,9 @@
-import { prisma } from "@/prisma/prisma-client";
+import { getCategories } from "@/services/cache/get-categories";
 import { Header } from "./header";
 
 export async function HeaderWithData() {
-    const categories = await prisma.category.findMany({
-        include: {
-            products: {
-                include: {
-                    variations: true
-                }
-            }
-        }
-    });
+    const categories = await getCategories()
     return (
-        <Header withData={true} categories={categories.filter((categories) => categories.products.length > 0)} />
+        <Header withData={true} categories={categories} />
     )
 }

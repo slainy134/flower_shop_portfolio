@@ -1,16 +1,19 @@
 'use client';
 
-import { IProduct } from '@/@types/prisma';
+import { deleteProduct } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Drawer, DrawerContent, DrawerTitle } from '@/components/ui/drawer';
 import { useChooseProduct } from '@/hooks/use-choose-product';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { cn } from '@/lib/utils';
+import { IProduct } from '@/services/dto/product.dto';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { Loader2, X } from 'lucide-react';
+import { Loader2, Trash, X } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 import { MobileProductForm } from '../mobile-product-form';
 import { Variation } from '../variation';
 
@@ -25,6 +28,22 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
     const { selectedVariations, addVariation, totalPrice, onAddProduct, loading } = useChooseProduct(product, () => router.back());
 
     const isMobile = useIsMobile(1023);
+
+    const { data: session, } = useSession();
+    const admin = session?.user.role == "ADMIN" ? true : false;
+
+    const handleDelete = async () => {
+        try {
+            await deleteProduct(product.id);
+
+            toast.success("Товар удалён");
+
+            router.back();
+            router.refresh();
+        } catch (error) {
+            toast.error("Ошибка при удалении товара");
+        }
+    };
 
     return (
         <>{isMobile ? (
@@ -59,6 +78,12 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
                     </div>
                     <div className="lg:max-w-[45vw] xl:max-w-125 flex flex-col">
                         <div className="lg:max-w-[80%] xl:max-w-100">
+                            {admin && (
+                                <Trash
+                                    className='cursor-pointer'
+                                    onClick={() => handleDelete()}
+                                />
+                            )}
                             <h1 className="font-bold text-xl lg:text-2xl">{product.name}</h1>
                             <p className="font-normal text-xs pt-2 line-clamp-3">{product.description}</p>
                         </div>

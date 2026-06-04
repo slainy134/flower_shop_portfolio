@@ -1,5 +1,5 @@
+import { Providers } from "@/components/shared/providers";
 import { JetBrains_Mono } from "next/font/google";
-import { Toaster } from 'react-hot-toast';
 import "./globals.css";
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -11,8 +11,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={jetbrainsMono.variable}>
-                {children}
-                <Toaster />
+                <Providers>{children}</Providers>
             </body>
         </html>
     );

@@ -15,3 +15,12 @@ export interface CreateCartItemDTO {
     productId: number;
     variations?: number[];
 }
+
+export type CalcCartItemDTO = {
+    product: {
+        price: number;
+    };
+    variations?: {
+        price: number;
+    }[] | null;
+};
